@@ -10,11 +10,9 @@ const {
 
 const taskRoute = express.Router();
 
-taskRoute.get("/", getAllTasks),
-taskRoute.get("/:status", getTaskByStatus),
-taskRoute.post("/", createTask),
-taskRoute.patch("/:id", updateTask),
-taskRoute.delete("/:id", deleteTask),
-
-
-(module.exports = { taskRoute });
+  taskRoute.get("/", getAllTasks),
+  taskRoute.get("/:status", getTaskByStatus),
+  taskRoute.post("/", createTask),
+  taskRoute.patch("/:id", updateTask),
+  taskRoute.delete("/:id", deleteTask),
+  (module.exports = { taskRoute });

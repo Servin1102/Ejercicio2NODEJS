@@ -69,15 +69,22 @@ const updateTask = async (req, res) => {
   try {
     const { finishDate } = req.body;
     const { id, limitDate } = req.params;
+    const ld = new Date(limitDate);
+    const fd = new Date(finishDate);
 
     const task = await Tasks.findOne({ where: { id } });
 
-    await task.update({ finishDate });
+    if (task.status === "active") {
+      await task.update({ finishDate });
+      fd >= ld
+        ? task.update({ status: "late" })
+        : task.update({ status: "completed" });
 
-    res.status(200).json({
-      status: "success",
-      data: { task },
-    });
+      res.status(200).json({
+        status: "success",
+        data: { task },
+      });
+    }
   } catch (error) {
     console.log(error);
   }
